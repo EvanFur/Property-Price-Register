@@ -7,7 +7,6 @@ from sklearn.model_selection import train_test_split
 import re # Import regex library for cleaner extraction
 
 # --- Configuration ---
-# !!! IMPORTANT: Verify these column names match your CSV file !!!
 DATE_COLUMN = 'Date of Sale (dd/mm/yyyy)'
 # Attempt to find the price column dynamically, but provide a fallback/check
 PRICE_COLUMN_CANDIDATES = [
@@ -59,7 +58,7 @@ except Exception as e:
         exit()
 
 # --- Basic Exploration (Optional) ---
-# print("\nFirst few rows:\n", df.head())
+print("\nFirst few rows:\n", df.head())
 # print("\nData types:\n", df.dtypes)
 # print("\nColumns:\n", df.columns.tolist())
 # print("\nMissing values:\n", df.isnull().sum())
