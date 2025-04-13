@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Irish Property Price Predictor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #28a745;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        select, input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .btn {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        .btn:hover {
+            background-color: #218838;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9f7ef;
+            border-radius: 4px;
+            text-align: center;
+        }
+        .price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #28a745;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Irish Property Price Predictor</h1>
+        
+        <form action="/predict" method="post">
+            <div class="form-group">
+                <label for="county">County:</label>
+                <select id="county" name="county" required>
+                    <option value="">Select county</option>
+                    <option value="Carlow">Carlow</option>
+                    <option value="Cavan">Cavan</option>
+                    <option value="Clare">Clare</option>
+                    <option value="Cork">Cork</option>
+                    <option value="Donegal">Donegal</option>
+                    <option value="Dublin">Dublin</option>
+                    <option value="Galway">Galway</option>
+                    <option value="Kerry">Kerry</option>
+                    <option value="Kildare">Kildare</option>
+                    <option value="Kilkenny">Kilkenny</option>
+                    <option value="Laois">Laois</option>
+                    <option value="Leitrim">Leitrim</option>
+                    <option value="Limerick">Limerick</option>
+                    <option value="Longford">Longford</option>
+                    <option value="Louth">Louth</option>
+                    <option value="Mayo">Mayo</option>
+                    <option value="Meath">Meath</option>
+                    <option value="Monaghan">Monaghan</option>
+                    <option value="Offaly">Offaly</option>
+                    <option value="Roscommon">Roscommon</option>
+                    <option value="Sligo">Sligo</option>
+                    <option value="Tipperary">Tipperary</option>
+                    <option value="Waterford">Waterford</option>
+                    <option value="Westmeath">Westmeath</option>
+                    <option value="Wexford">Wexford</option>
+                    <option value="Wicklow">Wicklow</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="year">Year:</label>
+                <input type="number" id="year" name="year" min="2010" max="2030" value="2024" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="month">Month:</label>
+                <select id="month" name="month" required>
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                    <option value="4" selected>April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="property_type">Property Type:</label>
+                <select id="property_type" name="property_type" required>
+                    <option value="new">New Property</option>
+                    <option value="second-hand" selected>Second-hand Property</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="size">Size:</label>
+                <select id="size" name="size" required>
+                    <option value="small">Small (less than 38 sq meters)</option>
+                    <option value="medium" selected>Medium (38-125 sq meters)</option>
+                    <option value="large">Large (greater than 125 sq meters)</option>
+                </select>
+            </div>
+            
+            <button type="submit" class="btn">Predict Price</button>
+        </form>
+        
+        {% if prediction %}
+        <div class="result">
+            <h2>Predicted Property Price</h2>
+            <p>A {{ size }} {{ property_type }} property in {{ county }} is estimated to cost:</p>
+            <p class="price">{{ prediction }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
